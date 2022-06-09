@@ -1,47 +1,28 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>휴게소 정보 서비스 : 주유소</title>
-<link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-
-	<header>
-		<div class="row">
-			<div class="col">
-				<a href="service.html"><img class="style-logo" src="images/logo.png" alt="Prism Logo"></a>
-				<nav class="style-nav">
-					<ul>
-						<li><a href="parking.html">주차장</a></li>
-						<li><a href="gas.html">주유소</a></li>
-						<li><a href="store1.html">매장현황</a></li>
-						<li><a href="store2.html">매장대기</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<p></p>
-	<main>
-		<p><img src="images/image-4.jpg" style="img"><br>
-	  </p>
-		<p>휴게소의 주유소입니다.</p>
-		<p>휴게소의 기름값을 확인할수 있습니다.</p>
-		<br>
-		<br>
-		<br>
-	</main>
-	
-	<footer>
-		<div class="row">
-			<div class="col">
-				<p class="footer-text">대구대학교 정보통신공학부 멀티미디어공학</p>
-				<p class="footer-text">조장 : 장근국 (21628538),  조원 : 최원영 (21332183)</p>
-			</div>
-		</div>
-	</footer>
-
-</body>
-</html>
+<?php
+$target_Dir = https://192.168.25.56/;
+  $file = "abc.php";
+  $down = $target_Dir$file;
+  $filesize = filesize($down);
+  
+  if(file_exists($down)){
+    header("Content-Type:application/octet-stream");
+    header("Content-Disposition:attachment;filename=$file");
+    header("Content-Transfer-Encoding:binary");
+    header("Content-Length:".filesize($target_Dir.$file));
+    header("Cache-Control:cache,must-revalidate");
+    header("Pragma:no-cache");
+    header("Expires:0");
+    if(is_file($down)){
+        $fp = fopen($down,"r");
+        while(!feof($fp)){
+          $buf = fread($fp,8096);
+          $read = strlen($buf);
+          print($buf);
+          flush();
+        }
+        fclose($fp);
+    }
+  } else{
+    ?><script>alert("존재하지 않는 파일입니다.")</script><?
+  }
+?>
